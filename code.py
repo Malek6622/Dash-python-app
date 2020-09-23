@@ -1,27 +1,16 @@
 import dash
-#import dash_auth
-import dash_daq
 import dash_core_components as dcc
 import dash_html_components as html
-import datetime 
 import dash_bootstrap_components as dbc
 import plotly 
 import plotly.graph_objs as go
 import pandas as pd
 import numpy as np
 from dash.dependencies import Input, Output, State
-import math
 import requests
-import re
 import dash_bootstrap_components as dbc
 import dash_bootstrap_components.themes
 import dash_table as dt
-from plotly.subplots import make_subplots
-import base64
-
-
-image_filename = 'C:/Users/1692/Desktop/DashApp/image/confusion_matrix_for_tab2.png' # replace with your own image
-encoded_image = base64.b64encode(open(image_filename, 'rb').read())
 
 #external_stylesheets = [ 'https://codepen.io/chriddyp/pen/bWLwgP.css', 'https://codepen.io/chriddyp/pen/brPBPO.css' ,[dbc.themes.BOOTSTRAP]]
 BS = "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -42,20 +31,6 @@ features = ['ETHNICITY', 'DIAGNOSIS', 'GENDER', 'AGE',  'MORTALITY_INUNIT', 'MOR
 opts = [{'label' : i, 'value' : i} for i in features]
 
 white_button_style = {'background-color': 'white','color': 'Blue',}
-blue_button_style = {'background-color': 'blue','color': 'White'}
-
-def generate_table(dataframe, max_rows=10):
-      return dbc.Table([
-        html.Thead(
-            html.Tr([html.Th(col) for col in dataframe.columns],style={'color': '#0000A0'})
-        ),
-        html.Tbody([
-            html.Tr([
-                html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
-            ]) for i in range(min(len(dataframe), max_rows))
-        ],style={ 'bordered':True,'hover':True,'striped':True,'dark':True}
-        ),
-    ])
 
 tab2_in_cm_train_report["Precision"], tab2_in_cm_train_report["Recall"], tab2_in_cm_train_report["f1-score"],tab2_in_cm_train_report["Support"]= tab2_in_cm_train_report[",precision,recall,f1-score,support"].str.split(",", 3).str
 tab2_in_cm_train_report = tab2_in_cm_train_report.drop([',precision,recall,f1-score,support'],axis = 1)
